@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Book {
     private final String name;
     private final Author author;
@@ -27,5 +29,28 @@ public class Book {
 
     public void setYearOfPublication(int yearOfPublication) {
         this.yearOfPublication = yearOfPublication;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + " " + this.author.toString() + " " + this.yearOfPublication;
+    }
+
+    @Override
+    public boolean equals(Object entity) {
+        if (this == entity) return true;
+        if (entity == null || this.getClass() != entity.getClass()) return false;
+
+        Book book = (Book) entity;
+        boolean isYearOfPublicationEqual = this.yearOfPublication == book.yearOfPublication;
+        boolean isNameEqual = this.name.equals(book.name);
+        boolean isAuthorEqual = this.author.equals(book.author);
+
+        return isYearOfPublicationEqual && isNameEqual && isAuthorEqual;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, author, yearOfPublication);
     }
 }
